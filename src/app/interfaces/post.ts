@@ -3,6 +3,7 @@ enum MediaType {
 }
 
 export type IPost = {
+    id: string;
     account_username: string;
     post_id: string;
     media_type: MediaType;
