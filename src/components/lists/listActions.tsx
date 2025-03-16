@@ -9,19 +9,19 @@ import ButtonDropdown from "../../components/buttonDropdown";
 
 import PostAPI from "../../lib/api/post";
 
-const ListActionsDropdown = ({ postId, lists, trigger }) => {
+const ListActionsDropdown = ({ postId, lists, refreshFn }) => {
    
     const addToList = useCallback(async (listId: string) => {
         await PostAPI.addToList(postId, listId);
-        trigger();
+        refreshFn();
         console.log('added to list');
-    }, [postId]);
+    }, [refreshFn, postId]);
 
     const removeFromList = useCallback(async (listId: string) => {
         await PostAPI.removeFromList(postId, listId);
-        trigger();
+        refreshFn();
         console.log('remove from list');
-    }, [postId]);
+    }, [refreshFn, postId]);
 
     const listActions = useMemo(() =>
         lists?.map(list => {

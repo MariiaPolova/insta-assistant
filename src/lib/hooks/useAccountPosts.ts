@@ -2,19 +2,19 @@ import useSWR from "swr";
 import fetcher, { API_URL } from "../helpers/fetcher";
 import { IPost } from "../../app/interfaces/post";
 
-function usePost (id: string) {
-    const { data, error, isLoading, mutate } = useSWR<IPost>(
-      id ? `${API_URL}/api/posts/${id}` : null,
+function useAccountPosts (accountUsername: string) {
+    const { data, error, isLoading, mutate } = useSWR<IPost[]>(
+      accountUsername ? `${API_URL}/api/${accountUsername}/posts` : [],
         fetcher,
         { revalidateOnFocus: false }
       );
 
     return {
-      post: data,
+      posts: data,
       isLoading,
       error,
       mutate
     }
   }
 
-  export default usePost;
+  export default useAccountPosts;

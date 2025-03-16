@@ -13,5 +13,7 @@ export type IPost = {
     display_url: string;
     video_url?: string;
     images: string[];
-    created_at: Date;
+    created_at: string;
 }
+
+export type PostWithList = IPost & { lists?: string[] };
