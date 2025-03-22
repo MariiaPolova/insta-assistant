@@ -22,27 +22,27 @@ export default function PostInfoPage() {
 
   return (
     <Fragment>
-      <article>
+      <article className="m-3 py-10 px-4 sm:px-6 lg:px-8 flex gap-y-4 lg:flex-row flex-col bg-gray-100 rounded-lg">
         <Image
-          className="h-96 w-full rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"
+          className="w-35 object-cover max-sm:h-80 sm:aspect-[2/1] lg:aspect-square rounded-lg"
           src={post.display_url}
           alt="food image"
           width={500}
           height={500}
         />
-        <div className="flex items-center gap-x-4 text-xs">
-          <time className="text-gray-500">
-            {post.created_at}
-          </time>
-          <a
-            href={post.url}
-            className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-          >
-            Link to {post.account_username}&apos;s post
-          </a>
-        </div>
-        <div className="group relative">
-          <p className="mt-5 whitespace-pre text-sm/6 text-gray-600">{post.caption}</p>
+        <div className="text-sm md:text-md max-w-2xl px-0 md:px-4 lg:px-8">
+          <div className="flex justify-between items-center">
+            <time className="text-gray-500">
+              {`${new Date(post.created_at).toLocaleDateString()} ${new Date(post.created_at).toLocaleTimeString()}`}
+            </time>
+            <a
+              href={post.url}
+              className="relative z-10 rounded-full bg-gray-200 px-3 py-1.5 font-medium text-gray-600 hover:bg-blue-100"
+            >
+              Link to {post.account_username}&apos;s post
+            </a>
+          </div>
+          <p className="mt-5 whitespace-break-spaces text-sm/6 text-gray-600">{post.caption}</p>
         </div>
       </article>
     </Fragment>
