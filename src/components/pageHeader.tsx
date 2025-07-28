@@ -1,5 +1,7 @@
-import { CalendarIcon, LinkIcon, ArrowUturnLeftIcon, InboxArrowDownIcon } from '@heroicons/react/20/solid';
+import { LinkIcon, ArrowUturnLeftIcon, InboxArrowDownIcon, ArrowRightEndOnRectangleIcon, ArrowRightStartOnRectangleIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/navigation';
+import ThemeSwitcher from './theme/themeSwitcher';
+import ActionButton from './common/ActionButton';
 
 const PageHeader = ({ data }) => {
     const router = useRouter();
@@ -13,47 +15,47 @@ const PageHeader = ({ data }) => {
                 </h2>
                 <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
                     <div className="mt-2 flex items-center text-sm text-yellow-50">
-                        <CalendarIcon aria-hidden="true" className="mr-1.5 size-5 shrink-0 text-white-400" />
-                        {`Start: ${new Date(start_fetch_date).toLocaleDateString()} ${new Date(start_fetch_date).toLocaleTimeString()}`}
+                        <ArrowRightEndOnRectangleIcon aria-hidden="true" className="mr-1.5 size-5 shrink-0 text-white-400" />
+                        {`${new Date(start_fetch_date).toLocaleDateString()} ${new Date(start_fetch_date).toLocaleTimeString()}`}
                     </div>
                     <div className="mt-2 flex items-center text-sm text-yellow-50">
-                        <CalendarIcon aria-hidden="true" className="mr-1.5 size-5 shrink-0 text-white-400" />
-                        {`End: ${new Date(end_fetch_date).toLocaleDateString()} ${new Date(end_fetch_date).toLocaleTimeString()}`}
+                        <ArrowRightStartOnRectangleIcon aria-hidden="true" className="mr-1.5 size-5 shrink-0 text-white-400" />
+                        {`${new Date(end_fetch_date).toLocaleDateString()} ${new Date(end_fetch_date).toLocaleTimeString()}`}
                     </div>
                 </div>
             </div>
             <div className="mt-5 flex justify-end lg:ml-4 lg:mt-0 -mt-10 pb-6 lg:pb-0">
 
                 <span className="ml-3 sm:block">
-                    <button
-                        type="button"
-                        className="inline-flex items-center rounded-full bg-white px-3 py-2 text-sm font-semibold ring-1 ring-gray-300 ring-inset hover:bg-gray-50"
+                    <ActionButton
+                        label="Go Back"
                         onClick={() => router.back()}
-                    >
-                        <ArrowUturnLeftIcon aria-hidden="true" className="m-0 lg:-ml-0.5 lg:mr-1.5 size-5 text-gray-400" />
-                        <span className='hidden sm:block'>Go Back</span>
-                    </button>
+                        icon={ArrowUturnLeftIcon}
+                        className="ring-[var(--background)]"
+                        iconOnlyOnMobile={true}
+                    />
+                </span>
+
+                <ThemeSwitcher />
+
+                <span className="ml-3 sm:block">
+                    <ActionButton
+                        label="Fetch"
+                        onClick={() => router.back()}
+                        icon={InboxArrowDownIcon}
+                        className="ring-[var(--background)]"
+                        iconOnlyOnMobile={true}
+                    />
                 </span>
 
                 <span className="ml-3 sm:block">
-                    <button
-                        type="button"
-                        className="inline-flex items-center rounded-full bg-white px-3 py-2 text-sm font-semibold ring-1 ring-gray-300 ring-inset hover:bg-gray-50"
-                        onClick={() => router.back()}
-                    >
-                        <InboxArrowDownIcon aria-hidden="true" className="m-0 lg:-ml-0.5 lg:mr-1.5 size-5 text-gray-400" />
-                        <span className='hidden sm:block'>Fetch</span>
-                    </button>
-                </span>
-
-                <span className="ml-3 sm:block">
-                    <button
-                        type="button"
-                        className="inline-flex items-center rounded-full bg-white px-3 py-2 text-sm font-semibold ring-1 ring-gray-300 ring-inset hover:bg-gray-50"
-                    >
-                        <LinkIcon aria-hidden="true" className="m-0 lg:-ml-0.5 lg:mr-1.5 size-5 text-gray-400" />
-                        <span className='hidden sm:block'>{username}</span>
-                    </button>
+                    <ActionButton
+                        label={username}
+                        onClick={() => { }}
+                        icon={LinkIcon}
+                        className="ring-[var(--background)]"
+                        iconOnlyOnMobile={true}
+                    />
                 </span>
             </div>
         </div>

@@ -46,7 +46,7 @@ export default function AccountInfoPage() {
   return (
     <Fragment>
       <PageHeader data={account} />
-      <div className="bg-gray-100">
+      <div className="bg-gray-100 dark:bg-gray-800">
         {postIsLoading && <div>Posts are loading</div>}
         {!postIsLoading && !postError && (
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
