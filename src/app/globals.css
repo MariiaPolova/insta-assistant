@@ -33,7 +33,7 @@ body {
   }
 }
 
-.dark button, .dark a {
+.dark button{
   color: var(--foreground);
   background-color: var(--background);
   border-color: var(--border-color);
