@@ -1,3 +1,4 @@
+import { ThemeProvider } from '../context/themeContext';
 import './globals.css';
 export const metadata = {
   title: 'Insta assistant',
@@ -11,7 +12,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className='dark:bg-gray-800'>
+      <ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

@@ -18,7 +18,7 @@ export const Post = ({ post, lists, update, postsUpdate }: { post: PostWithList,
                     src={post.display_url}
                     width={500}
                     height={500}
-                    className="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square cursor-pointer"
+                    className="w-full rounded-lg object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square cursor-pointer"
                     onClick={() => router.push(`/post/${post.id}`)}
                 />
                 <div className="absolute top-1 left-1">
@@ -32,7 +32,7 @@ export const Post = ({ post, lists, update, postsUpdate }: { post: PostWithList,
                     <ListActionsDropdown dbPostId={post.id} postId={post.post_id} lists={lists} refreshPostFn={update} refreshPostsFn={postsUpdate} />
                 </div>
             </div>
-            <p className="text-base line-clamp-3 text-gray-600">{post.caption}</p>
+            <p className="text-base line-clamp-3 text-gray-600 dark:text-gray-100">{post.caption}</p>
         </div>
     )
 };
