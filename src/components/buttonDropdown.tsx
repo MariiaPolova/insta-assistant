@@ -7,8 +7,8 @@ const ButtonDropdown = ({Icon = ChevronDownIcon, actions = []}) => {
     return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50">
-          <Icon aria-hidden="true" className="-mr-1 size-5 text-gray-400" />
+        <MenuButton className="inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-sm font-semibold z-10 rounded-full px-3 py-1.5 font-medium text-white hover:bg-blue-100 border-2 border-white bg-yellow-600 bg-opacity-50">
+          <Icon aria-hidden="true" className="-mr-1 size-5 text-white-400" />
         </MenuButton>
       </div>
 

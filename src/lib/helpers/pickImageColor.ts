@@ -1,6 +1,12 @@
 export function getAverageRGB(imgEl) {
     const blockSize = 5; // only visit every 5 pixels
+    // TODO import from tailwind theme
     const defaultRGB = { r: 0, g: 0, b: 0 }; // for non-supporting envs
+
+    if (!document) {
+        return defaultRGB;
+    }
+
     const canvas = document.createElement('canvas');
     const context = canvas.getContext && canvas.getContext('2d');
     const rgb = { r: 0, g: 0, b: 0 };
