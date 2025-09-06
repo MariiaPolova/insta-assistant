@@ -22,7 +22,7 @@ export default function AccountInfoPage() {
   const { data: account, error, isLoading } = useAccount<IAccount>(id);
   const { data: lists, error: listsError, isLoading: listsIsLoading, mutate } = useList<IList[]>();
 
-  const { posts, error: postError, isLoading: postIsLoading } = useAccountPosts(id);
+  const { posts, error: postError, isLoading: postIsLoading, mutate: postsUpdate } = useAccountPosts(id);
   const [iPosts, setPosts] = useState<PostWithList[]>([]);
 
   useEffect(() => {
@@ -46,13 +46,13 @@ export default function AccountInfoPage() {
   return (
     <Fragment>
       <PageHeader data={account} />
-      <div className="bg-gray-100">
+      <div className="bg-gray-100 dark:bg-gray-800">
         {postIsLoading && <div>Posts are loading</div>}
         {!postIsLoading && !postError && (
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl py-10 sm:py-6 lg:max-w-none lg:py-8">
-              <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-                {iPosts.map((post) => <Post key={post.id} post={post} lists={lists} update={mutate} />)}
+            <div className="mx-auto max-w-2xl lg:max-w-none">
+              <div className="mt-2 lg:mt-0 space-y-1 lg:grid lg:grid-cols-3 lg:gap-x-6">
+                {iPosts.map((post) => <Post key={post.id} post={post} lists={lists} update={mutate} postsUpdate={postsUpdate}/>)}
               </div>
             </div>
           </div>)}

@@ -4,14 +4,21 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1f2937;
+  --border-color: #e5e7eb;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #1f2937;
+  --foreground: #ffffff;
+  --border-color: #a0a5ad;
+  --tw-ring-offset-color: var(--background);
+  --tw-ring-offset-shadow: var(--background);
+}
+
+/* body {
+  background-color: var(--background);
+  color: var(--foreground);
 } */
 
 body {
@@ -24,4 +31,10 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.dark button{
+  color: var(--foreground);
+  background-color: var(--background);
+  border-color: var(--border-color);
 }
