@@ -1,10 +1,10 @@
 import useSWR from "swr";
-import fetcher, { API_URL } from "../helpers/fetcher";
+import fetcher from "../helpers/fetcher";
 import { IPost } from "../../app/interfaces/post";
 
 function usePost (id: string) {
     const { data, error, isLoading, mutate } = useSWR<IPost>(
-      id ? `${API_URL}/api/posts/${id}` : null,
+      id ? `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${id}` : null,
         fetcher,
         { revalidateOnFocus: false }
       );
