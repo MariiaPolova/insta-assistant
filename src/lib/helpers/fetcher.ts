@@ -25,6 +25,9 @@ async function fetcher (url) {
   }
 }
 
+console.log('process.env API_URL');
+console.log(process.env.NEXT_PUBLIC_API_URL);
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export { API_URL };
 
