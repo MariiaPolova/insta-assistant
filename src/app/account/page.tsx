@@ -11,6 +11,7 @@ import AccountAPI from "../../lib/api/account";
 
 
 export default function Index() {
+  console.log(process.env.NEXT_PUBLIC_API_URL);
   const { data: accounts, error, isLoading } = useAccount<IAccount[]>();
   const [open, setOpen] = useState(false);
   const [newUsername, setNewUsername] = useState('');
