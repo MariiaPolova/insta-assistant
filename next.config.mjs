@@ -5,11 +5,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'storage.googleapis.com',
-        // port: '',
-        // pathname: '/account123/**',
-        // search: '',
       },
     ],
+  },
+  env: {
+    API_URL: process.env.API_URL,
   },
 };
 
