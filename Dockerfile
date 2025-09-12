@@ -1,6 +1,16 @@
 # Use the official Node.js image as the base image
 FROM node:18-alpine
 
+# Declare build args (values come from Cloud Build `--build-arg`)
+ARG NODE_ENV
+ARG NEXT_PUBLIC_API_URL
+ARG API_URL
+
+# Set runtime env vars (these get baked into the container image)
+ENV NODE_ENV=$NODE_ENV
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV API_URL=$API_URL
+
 # Set the working directory
 WORKDIR /usr/src/app
 
