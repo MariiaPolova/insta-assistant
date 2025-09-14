@@ -8,8 +8,8 @@ ARG API_URL
 
 # Set runtime env vars (these get baked into the container image)
 ENV NODE_ENV=$NODE_ENV
-ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
-ENV API_URL=$API_URL
+ENV NEXT_PUBLIC_API_URL=test123
+ENV API_URL=123testapiurl
 
 # Set the working directory
 WORKDIR /usr/src/app
@@ -18,7 +18,7 @@ WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install -only=production
 
 # Copy the rest of the application code
 COPY . .
