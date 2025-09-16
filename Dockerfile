@@ -1,16 +1,6 @@
 # Use the official Node.js image as the base image
 FROM node:18-alpine
 
-# # Declare build args (values come from Cloud Build `--build-arg`)
-ARG NODE_ENV
-ARG NEXT_PUBLIC_API_URL
-# ARG API_URL
-
-# # Set runtime env vars (these get baked into the container image)
-ENV NODE_ENV=$NODE_ENV
-ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
-# ENV API_URL=123testapiurl
-
 # Set the working directory
 WORKDIR /usr/src/app
 
@@ -18,12 +8,16 @@ WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN npm install -only=production
+RUN npm install --only=production
 
 # Copy the rest of the application code
 COPY . .
 
-# Build the Next.js app
+# Build the Next.js app (build-time env vars need to be available here)
+# For NEXT_PUBLIC_ vars, you might need them at build time
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
 RUN npm run build
 
 # Expose the port the app runs on
