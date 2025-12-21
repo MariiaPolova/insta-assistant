@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 # Copy package.json and package-lock.json
 COPY package.json package-lock.json ./
 
-# Install ALL dependencies (including dev) for build
+# Install ALL dependencies (including devDependencies) for build
 RUN npm install
 
 # Copy the rest of the application code
@@ -20,7 +20,7 @@ ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 
 RUN npm run build
 
-# Optionally, prune dev dependencies after build
+# Optionally, prune devDependencies after build to reduce image size
 RUN npm prune --production
 
 # Expose the port the app runs on
