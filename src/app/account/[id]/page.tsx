@@ -29,7 +29,7 @@ export default function AccountInfoPage() {
     if (posts) {
       setPosts(posts.map(post => ({
         ...post,
-        lists: lists.filter(list => list.posts_ids.includes(post.post_id)).map(({ name }) => name)
+        lists: lists?.filter(list => list.posts_ids.includes(post.post_id)).map(({ name }) => name)
       })));
     }
   }, [posts, lists]);

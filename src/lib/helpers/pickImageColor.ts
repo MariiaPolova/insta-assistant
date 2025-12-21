@@ -3,11 +3,11 @@ export function getAverageRGB(imgEl) {
     // TODO import from tailwind theme
     const defaultRGB = { r: 0, g: 0, b: 0 }; // for non-supporting envs
 
-    if (!document) {
+    if (!window?.document) {
         return defaultRGB;
     }
 
-    const canvas = document.createElement('canvas');
+    const canvas = window?.document.createElement('canvas');
     const context = canvas.getContext && canvas.getContext('2d');
     const rgb = { r: 0, g: 0, b: 0 };
     let data,

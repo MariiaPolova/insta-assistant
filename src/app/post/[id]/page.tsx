@@ -64,7 +64,7 @@ export default function PostInfoPage() {
         />
         <div className="text-sm md:text-md max-w-2xl px-0 md:px-4 lg:px-8">
           <p className="mt-5 whitespace-break-spaces text-sm/6 text-gray-600 dark:text-gray-100">{post.caption}</p>
-          <div className="mt-6">
+          <div className="mt-6 mb-8 md:mb-0">
             {post.hashtags.map((hashtag, i) =>
               <span
                 key={`${post.id}-${i}`}
