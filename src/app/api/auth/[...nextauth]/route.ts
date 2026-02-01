@@ -15,13 +15,19 @@ const handler = NextAuth({
     async session({ session, token }) {
       if (session?.user) {
         session.user.id = token.sub || "";
+        session.accessToken = token.accessToken;
       }
       return session;
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
       }
+
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+
       return token;
     },
   },
