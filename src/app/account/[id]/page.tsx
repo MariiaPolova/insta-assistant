@@ -46,12 +46,12 @@ export default function AccountInfoPage() {
   return (
     <Fragment>
       <PageHeader data={account} />
-      <div className="bg-gray-100 dark:bg-gray-800">
-        {postIsLoading && <div>Posts are loading</div>}
+      <div className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex flex-col rounded-lg min-h-[95vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
+        {postIsLoading && <div className="text-center py-12 text-gray-600 dark:text-gray-400 text-lg">Loading posts...</div>}
         {!postIsLoading && !postError && (
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl w-full">
             <div className="mx-auto max-w-2xl lg:max-w-none">
-              <div className="mt-2 lg:mt-0 space-y-1 lg:grid lg:grid-cols-3 lg:gap-x-6">
+              <div className="mt-2 lg:mt-0 space-y-6 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:gap-y-6">
                 {iPosts.map((post) => <Post key={post.id} post={post} lists={lists} update={mutate} postsUpdate={postsUpdate}/>)}
               </div>
             </div>

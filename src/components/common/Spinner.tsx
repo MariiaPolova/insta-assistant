@@ -1,29 +1,11 @@
 import React from "react";
 
 const LoadingSpinner = () => (
-  <div className="loading-spinner">
-    <style>
-      {`
-        @keyframes spin {
-          0% { transform : rotate(0deg); }
-          100% { transform : rotate(360deg); }
-        }
-
-        .loading-spinner {
-          position: relative;
-          width: 40px;
-          height: 40px;
-          margin: 90px auto;
-          border-radius: 50%;
-          border-top: 3px solid rgba(0, 0, 0, 0.1);
-          border-right: 3px solid rgba(0, 0, 0, 0.1);
-          border-bottom: 3px solid rgba(0, 0, 0, 0.1);
-          border-left: 3px solid #818a91;
-          transform: translateZ(0);
-          animation: spin 0.5s infinite linear;
-        }
-        `}
-    </style>
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="relative">
+      <div className="w-16 h-16 border-4 border-gray-200 dark:border-gray-700 rounded-full"></div>
+      <div className="w-16 h-16 border-4 border-transparent border-t-blue-600 dark:border-t-blue-400 rounded-full animate-spin absolute top-0 left-0"></div>
+    </div>
   </div>
 );
 
