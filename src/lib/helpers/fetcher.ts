@@ -1,4 +1,5 @@
 import { getSession } from "next-auth/react";
+import { AuthSession } from "../../app/interfaces/common";
 
 async function fetcher(url: string) {
   try {
@@ -11,7 +12,7 @@ async function fetcher(url: string) {
     // Add authentication token if user is logged in
     if (session?.user) {
       // Get the JWT token from NextAuth session
-      const token = (session as any).accessToken || (session as any).id_token;
+      const token = (session as AuthSession).id_token;
       if (token) {
         headers["Authorization"] = `Bearer ${token}`;
       }

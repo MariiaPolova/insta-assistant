@@ -1,4 +1,5 @@
 import requester from "../helpers/requester";
+import fetcher from "../helpers/fetcher";
 
 const SERVER_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -31,7 +32,7 @@ const PostAPI = {
       return error.response;
     }
   },
-  getDetailed: async (username) => await requester('GET', `${SERVER_BASE_URL}/profiles/${username}`),
+  getDetailed: async (username) => await fetcher(`${SERVER_BASE_URL}/profiles/${username}`),
 };
 
 export default PostAPI;

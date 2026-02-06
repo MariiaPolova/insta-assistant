@@ -1,4 +1,5 @@
 import { getSession } from "next-auth/react";
+import { AuthSession } from "../app/interfaces/common";
 
 interface RequestOptions extends RequestInit {
   headers?: Record<string, string>;
@@ -21,7 +22,7 @@ export async function authenticatedFetch(
   // Add authentication token if user is logged in
   if (session?.user) {
     // NextAuth session token - you may need to adjust based on your setup
-    const token = (session as any).accessToken || session.user.id;
+    const token = (session as AuthSession).id_token;
     headers["Authorization"] = `Bearer ${token}`;
   }
 

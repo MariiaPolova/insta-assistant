@@ -1,5 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { AuthSession } from "../../../interfaces/common";
+const SERVER_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const handler = NextAuth({
   providers: [
@@ -12,21 +14,34 @@ const handler = NextAuth({
     signIn: '/auth/signin',
   },
   callbacks: {
-    async session({ session, token }) {
-      if (session?.user) {
-        session.user.id = token.sub || "";
-        session.accessToken = token.accessToken;
+    async signIn({ account, profile }) {
+      try {
+        console.log('Sign-in callback triggered for user:', profile);
+        const headers: Record<string, string> = {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${account?.id_token}`,
+        };
+        const res = await fetch(`${SERVER_BASE_URL}/api/login`, {
+          method: 'POST',
+          headers,
+        });
+
+        return res.ok;
+      } catch (error) {
+        console.error("Error during sign-in callback:", error);
+        return false;
       }
+    },
+    async session({ session, token }) {
+       if (token.id_token) {
+      (session as AuthSession).id_token = token.id_token as string;
+    }
       return session;
     },
-    async jwt({ token, user, account }) {
-      if (user) {
-        token.id = user.id;
-      }
-
-      if (account) {
-        token.accessToken = account.access_token;
-      }
+    async jwt({ token, account }) {
+      if (account && account.id_token) {
+      token.id_token = account.id_token;
+    }
 
       return token;
     },
