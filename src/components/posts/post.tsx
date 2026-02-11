@@ -1,4 +1,5 @@
 
+'use client'
 import Image from 'next/image';
 import ListActionsDropdown from "../lists/listActions";
 import { useRouter } from 'next/navigation';
@@ -7,7 +8,7 @@ import { IList } from '../../app/interfaces/list';
 import { KeyedMutator } from 'swr';
 
 
-export const Post = ({ post, lists, update, postsUpdate }: { post: PostWithList, lists: IList[], update: KeyedMutator<IList[]>, postsUpdate: KeyedMutator<IPost[]> }) => {
+export const Post = ({ post, lists, update, postsUpdate }: { post: PostWithList, lists: IList[], update?: KeyedMutator<IList[]>, postsUpdate?: KeyedMutator<IPost[]> }) => {
     const router = useRouter();
 
     return (

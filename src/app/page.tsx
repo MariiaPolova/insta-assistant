@@ -60,20 +60,20 @@ export default function Home() {
             </p>
           </Link>
 
-          <Link
-            href="/post"
-            className="group block p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700"
-          >
-            <div className="flex items-center mb-4">
-              <DocumentTextIcon className="h-8 w-8 text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform" />
-              <h2 className="ml-3 text-2xl font-semibold text-gray-900 dark:text-white">
-                Posts
-              </h2>
-            </div>
-            <p className="text-gray-600 dark:text-gray-400">
-              Browse and manage Instagram posts
-            </p>
-          </Link>
+            <Link
+              href="/lists"
+              className="group block p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700"
+            >
+              <div className="flex items-center mb-4">
+                <DocumentTextIcon className="h-8 w-8 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform" />
+                <h2 className="ml-3 text-2xl font-semibold text-gray-900 dark:text-white">
+                  Lists
+                </h2>
+              </div>
+              <p className="text-gray-600 dark:text-gray-400">
+                Browse and manage Instagram lists
+              </p>
+            </Link>
         </div>
       </div>
     </div>

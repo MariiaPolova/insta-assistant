@@ -36,7 +36,7 @@ export async function authenticatedFetch(
  * GET request with authentication
  */
 export async function apiGet<T>(endpoint: string): Promise<T> {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const response = await authenticatedFetch(`${apiUrl}${endpoint}`);
 
   if (!response.ok) {
@@ -51,7 +51,7 @@ export async function apiGet<T>(endpoint: string): Promise<T> {
  * POST request with authentication
  */
 export async function apiPost<T>(endpoint: string, data?: any): Promise<T> {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const response = await authenticatedFetch(`${apiUrl}${endpoint}`, {
     method: "POST",
     body: data ? JSON.stringify(data) : undefined,
@@ -69,7 +69,7 @@ export async function apiPost<T>(endpoint: string, data?: any): Promise<T> {
  * PUT request with authentication
  */
 export async function apiPut<T>(endpoint: string, data?: any): Promise<T> {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const response = await authenticatedFetch(`${apiUrl}${endpoint}`, {
     method: "PUT",
     body: data ? JSON.stringify(data) : undefined,
@@ -87,7 +87,7 @@ export async function apiPut<T>(endpoint: string, data?: any): Promise<T> {
  * DELETE request with authentication
  */
 export async function apiDelete<T>(endpoint: string): Promise<T> {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const response = await authenticatedFetch(`${apiUrl}${endpoint}`, {
     method: "DELETE",
   });

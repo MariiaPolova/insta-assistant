@@ -8,7 +8,7 @@ const PageHeader = ({ data }) => {
     if (!data) return null;
     const { full_name, username, end_fetch_date, start_fetch_date } = data;
     return (
-        <div className="lg:flex lg:items-center lg:justify-between p-2 lg:m-2 bg-yellow-600 lg:p-8 lg:rounded-md rounded-b-lg">
+        <div className="lg:flex lg:items-center lg:justify-between p-2 lg:m-2 lg:mb-10 bg-yellow-600 lg:p-8 lg:rounded-md rounded-b-lg">
             <div className="min-w-0 flex-1 pt-2 lg:pt-0">
                 <h2 className="text-2xl/7 font-bold text-white-900 sm:truncate sm:text-3xl sm:tracking-tight">
                     {full_name}

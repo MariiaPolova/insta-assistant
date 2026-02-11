@@ -57,7 +57,7 @@ export default function Index() {
         handleInputChange={handleUserameChange}
         onOk={createAccount}
       ></ModalDialog>
-      <div className="px-4 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600 pb-20 py-4 lg:py-8 flex flex-row justify-between items-center">
+      <div className="px-4 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600 pb-20 py-4 lg:py-12 flex flex-row justify-between items-center">
         <h1 className="text-2xl lg:text-3xl font-bold text-white py-5">Instagram Accounts</h1>
         <button
           type="button"
