@@ -22,7 +22,7 @@ export const Post = ({ post, lists, update, postsUpdate }: { post: PostWithList,
                     className="w-full object-cover group-hover:scale-105 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square cursor-pointer transition-transform duration-300"
                     onClick={() => router.push(`/post/${post.id}`)}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" /> */}
                 <div className="absolute top-2 left-2 flex flex-wrap gap-1">
                     {post.lists?.map((name) => (
                         <span key={name} className="inline-flex items-center px-3 py-1.5 text-xs font-semibold rounded-full text-white bg-gradient-to-r from-yellow-500 to-orange-500 backdrop-blur-sm shadow-lg border border-white/20">

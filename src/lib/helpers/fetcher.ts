@@ -1,4 +1,4 @@
-import { getSession } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
 import { AuthSession } from "../../app/interfaces/common";
 
 async function fetcher(url: string) {
@@ -21,6 +21,11 @@ async function fetcher(url: string) {
     const res = await fetch(url, { headers });
     
     if (!res.ok) {
+
+      if(res.status === 401) {
+        signOut({ callbackUrl: "/auth/signin" });
+      }
+
       const error = await res.json().catch(() => ({ message: res.statusText }));
       throw new Error(error.message || "Request failed");
     }
@@ -30,9 +35,6 @@ async function fetcher(url: string) {
     throw new Error(error.message);
   }
 }
-
-console.log('process.env API_URL');
-console.log(process.env.API_URL);
 
 const API_URL = process.env.API_URL;
 export { API_URL };

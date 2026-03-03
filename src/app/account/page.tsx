@@ -1,5 +1,6 @@
 'use client'
 import Link from "next/link";
+import UserMenu from "../../components/UserMenu";
 import useAccount from "../../lib/hooks/useAccount";
 import type { IAccount } from "../interfaces/account";
 import LoadingSpinner from "../../components/common/Spinner";
@@ -8,6 +9,8 @@ import { Fragment, useState } from "react";
 import { UserPlusIcon } from "@heroicons/react/20/solid";
 import ModalDialog from "../../components/common/ModalDialog";
 import AccountAPI from "../../lib/api/account";
+import ActionButton from "../../components/common/ActionButton";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 
 
 export default function Index() {
@@ -58,15 +61,34 @@ export default function Index() {
         onOk={createAccount}
       ></ModalDialog>
       <div className="px-4 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600 pb-20 py-4 lg:py-12 flex flex-row justify-between items-center">
-        <h1 className="text-2xl lg:text-3xl font-bold text-white py-5">Instagram Accounts</h1>
-        <button
+        <div className="inline-flex">
+          <ActionButton
+            label="Go Back"
+            onClick={() => { window.history.back() }}
+            icon={ChevronLeftIcon}
+            className="inline-flex items-center rounded-lg px-4 py-2.5 mr-2 font-semibold !bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/20 text-white transition-all duration-300 hover:scale-105"
+            disabled={false}
+          />
+          <ActionButton
+            label="Add new"
+            onClick={() => setOpen(true)}
+            icon={UserPlusIcon}
+            className="inline-flex items-center rounded-lg px-4 py-2.5 font-semibold !bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/20 text-white transition-all duration-300 hover:scale-105"
+            disabled={false}
+          />
+
+
+        </div>
+        <div className="flex items-center"><UserMenu transparent /></div>
+
+        {/* <button
           type="button"
           onClick={() => setOpen(true)}
           className="inline-flex items-center rounded-full px-4 py-2.5 text-sm font-semibold bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/20 text-white transition-all duration-300 hover:scale-105"
         >
           <UserPlusIcon aria-hidden="true" className="m-0 lg:-ml-0.5 lg:mr-1.5 size-5" />
           <span className='hidden sm:block'>Add new account</span>
-        </button>
+        </button> */}
       </div>
       <div className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex gap-y-4 flex-col rounded-lg min-h-[95vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
         <ul role="list" className="space-y-4">
@@ -98,8 +120,8 @@ export default function Index() {
               </div>
             </li>
           ))}
-      </ul>
-    </div>
+        </ul>
+      </div>
     </Fragment >
   )
 }

@@ -4,7 +4,7 @@ import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react";
 import { UserCircleIcon, ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
-export default function UserMenu() {
+export default function UserMenu( { transparent = false }: { transparent?: boolean }) {
   const { data: session } = useSession();
 
   if (!session?.user) {
@@ -13,7 +13,7 @@ export default function UserMenu() {
 
   return (
     <Menu>
-      <MenuButton className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+      <MenuButton className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${transparent ? '!bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/20 text-white transition-all duration-300 hover:scale-105' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}`}>
         {session.user.image ? (
           <Image
             src={session.user.image}
@@ -25,7 +25,7 @@ export default function UserMenu() {
         ) : (
           <UserCircleIcon className="w-8 h-8 text-gray-600 dark:text-gray-400" />
         )}
-        <span className="text-sm font-medium text-gray-900 dark:text-white">
+        <span className="font-medium text-gray-900 dark:text-white">
           {session.user.name}
         </span>
       </MenuButton>
