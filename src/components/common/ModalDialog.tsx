@@ -1,9 +1,21 @@
 'use client'
 
+import { useState } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, Input } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
-export default function ModalDialog({ open, setOpen, inputLabel, inputValue, handleInputChange, onOk }) {
+export default function ModalDialog({ open, setOpen, inputLabel, inputValue, handleInputChange, onOk, postsCount, handlePostsCountChange }) {
+  const [error, setError] = useState<string | null>(null);
+
+  const handleAdd = () => {
+    if (!inputValue || inputValue.trim() === "") {
+      setError("Username is required.");
+      return;
+    }
+    setError(null);
+    onOk(inputValue, postsCount);
+  };
+
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-10">
       <DialogBackdrop
@@ -15,36 +27,54 @@ export default function ModalDialog({ open, setOpen, inputLabel, inputValue, han
         <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
           <DialogPanel
             transition
-            className="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+            className="relative transform overflow-hidden rounded-lg text-left shadow-xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
           >
-            <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div className="px-6 pt-8 pb-6 sm:p-8 sm:pb-6">
               <div className="sm:flex sm:items-start">
-                <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
-                  <ExclamationTriangleIcon aria-hidden="true" className="size-6 text-red-600" />
-                </div>
-                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                  <DialogTitle as="h3" className="text-base font-semibold text-gray-900">
+                <div className="w-full">
+                  <DialogTitle as="h3" className="text-xl font-bold text-center text-blue-700 dark:text-purple-400 mb-8">
                     Add new account
                   </DialogTitle>
-                  <div className="mt-2">
-                    <Input
-                      id={inputLabel}
-                      name={inputLabel}
-                      type="text"
-                      placeholder={inputLabel}
-                      className="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
-                      value={inputValue}
-                      onChange={handleInputChange}
-                    />
+                  <div className="mt-4 flex flex-col gap-6 justify-center">
+                    <div className="flex flex-col items-start w-full">
+                      <label htmlFor={inputLabel} className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username <span className="text-red-500">*</span></label>
+                      <Input
+                        id={inputLabel}
+                        name={inputLabel}
+                        type="text"
+                        placeholder={inputLabel}
+                        required
+                        className="block w-full rounded-lg border border-blue-300 dark:border-purple-700 bg-white dark:bg-gray-900 py-2 px-4 text-base text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-purple-500 sm:text-sm"
+                        value={inputValue}
+                        onChange={e => {
+                          handleInputChange(e);
+                          if (error) setError(null);
+                        }}
+                      />
+                      {error && <span className="mt-2 text-sm text-red-600">{error}</span>}
+                    </div>
+                    <div className="flex flex-col items-start w-full">
+                      <label htmlFor="postsCount" className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Number of posts to fetch</label>
+                      <Input
+                        id="postsCount"
+                        name="postsCount"
+                        type="number"
+                        min={1}
+                        placeholder="Enter number"
+                        className="block w-full rounded-lg border border-blue-300 dark:border-purple-700 bg-white dark:bg-gray-900 py-2 px-4 text-base text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-purple-500 sm:text-sm"
+                        value={postsCount}
+                        onChange={handlePostsCountChange}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+            <div className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 rounded-b-lg">
               <button
                 type="button"
-                onClick={() => onOk(inputValue)}
-                className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
+                onClick={handleAdd}
+                className="inline-flex w-full justify-center rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-md hover:from-blue-700 hover:to-purple-700 transition-all duration-300 sm:ml-3 sm:w-auto"
               >
                 Add
               </button>
@@ -52,7 +82,7 @@ export default function ModalDialog({ open, setOpen, inputLabel, inputValue, han
                 type="button"
                 data-autofocus
                 onClick={() => setOpen(false)}
-                className="mt-3 inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                className="mt-3 inline-flex w-full justify-center rounded-lg px-3 py-2 text-sm font-semibold text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 shadow-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 sm:mt-0 sm:w-auto"
               >
                 Cancel
               </button>

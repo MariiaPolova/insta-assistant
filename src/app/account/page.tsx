@@ -17,19 +17,20 @@ export default function Index() {
   console.log(process.env.NEXT_PUBLIC_API_URL);
   const { data: accounts, error, isLoading } = useAccount<IAccount[]>();
   const [open, setOpen] = useState(false);
-  const [newUsername, setNewUsername] = useState('');
+  const [formData, setFormData] = useState({ username: '', postsCount: 10 });
 
-  const handleUserameChange = (event) => {
-    setNewUsername(event.target.value);
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const createAccount = async (username) => {
+  const createAccount = async (username, postsCount) => {
     if (!username) {
       return;
     }
     const account = await AccountAPI.create(username);
     if (account?.created_at) {
-      await AccountAPI.populate(username);
+      await AccountAPI.populate(username, postsCount);
       // Refresh accounts list
       // const updatedAccounts = useAccount<IAccount[]>();
       // if (updatedAccounts.error) {
@@ -38,7 +39,7 @@ export default function Index() {
     }
 
     setOpen(false);
-    setNewUsername('');
+    setFormData({ username: '', postsCount: 10 });
   }
 
   if (!accounts && isLoading) {
@@ -56,11 +57,13 @@ export default function Index() {
         open={open}
         setOpen={setOpen}
         inputLabel='username'
-        inputValue={newUsername}
-        handleInputChange={handleUserameChange}
+        inputValue={formData.username}
+        handleInputChange={handleFormChange}
+        postsCount={formData.postsCount}
+        handlePostsCountChange={handleFormChange}
         onOk={createAccount}
       ></ModalDialog>
-      <div className="px-4 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600 pb-20 py-4 lg:py-12 flex flex-row justify-between items-center">
+      <div className="px-4 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600 pb-20 py-4 lg:pt-12 lg:pb-24  flex flex-row justify-between items-center">
         <div className="inline-flex">
           <ActionButton
             label="Go Back"

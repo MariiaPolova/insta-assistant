@@ -47,7 +47,7 @@ export default function AccountInfoPage() {
     <Fragment>
       <PageHeader data={account} />
       <div className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex flex-col rounded-lg min-h-[95vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
-        {postIsLoading && <div className="text-center py-12 text-gray-600 dark:text-gray-400 text-lg">Loading posts...</div>}
+        {postIsLoading && <div className="text-center lg:pt-12 lg:pb-24 text-gray-600 dark:text-gray-400 text-lg">Loading posts...</div>}
         {!postIsLoading && !postError && (
           <div className="mx-auto max-w-7xl w-full">
             <div className="mx-auto max-w-2xl lg:max-w-none">

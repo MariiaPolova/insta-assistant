@@ -13,10 +13,10 @@ const AccountAPI = {
       return error.response;
     }
   },
-  populate: async (username) => {
+  populate: async (username, postsCount) => {
     try {
       const response = await requester('POST',
-        `${SERVER_BASE_URL}/api/populate/${username}/posts`);
+        `${SERVER_BASE_URL}/api/populate/${username}/posts`, { postsCount });
       return response;
     } catch (error) {
       return error.response;
