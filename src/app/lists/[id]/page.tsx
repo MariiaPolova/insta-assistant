@@ -33,7 +33,7 @@ export default function ListItemsPage({ params }: { params: { id: string } }) {
 
   return (
     <div className="mx-auto max-w-7xl w-full">
-      <div className="flex flex-row justify-between px-4 py-8 lg:px-8 lg:py-12 mb-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg">
+      <div className="px-4 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600 pb-20 py-4 lg:pt-12 lg:pb-24 flex flex-row justify-between items-center">
         <div className="">
           <ActionButton
             label="Go Back"
@@ -49,7 +49,8 @@ export default function ListItemsPage({ params }: { params: { id: string } }) {
             {list.posts_ids.length} posts
           </span>
         </div>
-          <div className="flex items-center"><UserMenu transparent /></div>
+          <div className="flex items-center"><UserMenu transparent />
+          </div>
       </div>
       <div className="mt-2 lg:mt-0 space-y-6 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:gap-y-6 m-3 lg:mx-8 py-10 px-6 lg:px-12 rounded-lg min-h-[95vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
         {list.posts_ids.map((listPost: IPost) => (

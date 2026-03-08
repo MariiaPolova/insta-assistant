@@ -63,7 +63,7 @@ export default function Index() {
         handlePostsCountChange={handleFormChange}
         onOk={createAccount}
       ></ModalDialog>
-      <div className="px-4 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600 pb-20 py-4 lg:pt-12 lg:pb-24  flex flex-row justify-between items-center">
+      <div className="px-4 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600 pb-20 py-4 lg:pt-12 lg:pb-24 flex flex-row justify-between items-center">
         <div className="inline-flex">
           <ActionButton
             label="Go Back"

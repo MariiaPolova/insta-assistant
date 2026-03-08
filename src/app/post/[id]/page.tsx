@@ -32,8 +32,8 @@ export default function PostInfoPage() {
 
   return (
     <Fragment>
-      <div className="px-4 pb-4">
-        <div className="flex flex-row lg:items-center lg:justify-between px-4 py-4 lg:px-8 lg:py-12 mb-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg">
+      <div>
+        <div className="px-4 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600 pb-20 py-4 lg:pt-12 lg:pb-24 flex flex-row justify-between items-center">
           <div className="min-w-0 flex-1 flex flex-row items-center">
             <ActionButton
               label="Go Back"
