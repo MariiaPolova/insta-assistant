@@ -13,7 +13,7 @@ export default function UserMenu( { transparent = false }: { transparent?: boole
 
   return (
     <Menu>
-      <MenuButton className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${transparent ? '!bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/20 text-white transition-all duration-300 hover:scale-105' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}`}>
+      <MenuButton className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${transparent ? '!bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/20 text-white transition-all duration-300 hover:scale-105 z-10' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}`}>
         {session.user.image ? (
           <Image
             src={session.user.image}

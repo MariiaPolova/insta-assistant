@@ -1,4 +1,5 @@
 'use client'
+import UserMenu from "../../../components/UserMenu";
 import { Fragment, useState, useMemo, useContext } from "react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
@@ -9,6 +10,7 @@ import { getAverageRGB } from "../../../lib/helpers/pickImageColor";
 import { ArrowUturnLeftIcon } from "@heroicons/react/20/solid";
 import { ThemeContext } from "../../../context/themeContext";
 import ActionButton from "../../../components/common/ActionButton";
+import { ChevronLeftIcon, LinkIcon } from "@heroicons/react/24/outline";
 
 export default function PostInfoPage() {
   const { id } = useParams() as { id: string };
@@ -30,30 +32,28 @@ export default function PostInfoPage() {
 
   return (
     <Fragment>
-      <div className="px-4 pb-20"
-        style={{
-          backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b})`
-        }}>
-        <div className="flex flex-row justify-between items-center py-1 sm:py-2 lg:py-4 lg:px-8">
-          <ActionButton
-            label="Go Back"
-            onClick={() => router.back()}
-            icon={ArrowUturnLeftIcon}
-          />
-          <div className="mt-6 flex flex-col items-center">
-            <a
-              href={post.url}
-              className="relative z-10 rounded-full px-3 py-1.5 font-medium text-white hover:bg-blue-100 border-2 border-white"
-            >
-              Link to {post.account_username}&apos;s post
-            </a>
-            <time className="text-white-10  0 text-sm mt-1">
-              {`${new Date(post.created_at).toLocaleDateString()} ${new Date(post.created_at).toLocaleTimeString()}`}
-            </time>
+      <div className="px-4 pb-4">
+        <div className="flex flex-row lg:items-center lg:justify-between px-4 py-4 lg:px-8 lg:py-12 mb-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg">
+          <div className="min-w-0 flex-1 flex flex-row items-center">
+            <ActionButton
+              label="Go Back"
+              onClick={() => router.back()}
+              icon={ChevronLeftIcon}
+              className="inline-flex items-center rounded-lg px-4 py-2.5 font-semibold !bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/20 text-white transition-all duration-300 hover:scale-105 z-10"
+              disabled={false}
+            />
+            <ActionButton
+              label="Link to post"
+              onClick={() => window.open(post.url, '_blank', 'noopener,noreferrer')}
+              icon={LinkIcon}
+              className="inline-flex items-center rounded-lg px-4 py-2.5 ml-2 font-semibold !bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/20 text-white transition-all duration-300 hover:scale-105 z-10"
+              disabled={false}
+            />
           </div>
+          <div className="flex items-center"><UserMenu transparent /></div>
         </div>
       </div>
-      <article className="m-3 lg:mx-8 py-10 px-4 sm:px-6 lg:px-12 flex gap-y-4 lg:flex-row flex-col rounded-lg min-h-[95vh] -mt-20 bg-white/20 backdrop-blur-md">
+      <article className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex lg:flex-row flex-col rounded-lg min-h-[95vh] -mt-20 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
         <Image
           onLoad={(e) => setImage(e.target)}
           className="w-35 object-cover max-sm:h-80 sm:aspect-[2/1] lg:aspect-square rounded-lg"
@@ -79,6 +79,13 @@ export default function PostInfoPage() {
                 {hashtag}
               </span>
             )}
+          </div>
+          <div className="mt-6">
+            <span className="inline-flex items-center px-3 py-1.5 text-xs font-semibold rounded-full border-2 border-white/20 text-white shadow-md">
+              <time className="font-mono">
+                {`Created at: ${new Date(post.created_at).toLocaleDateString()} ${new Date(post.created_at).toLocaleTimeString()}`}
+              </time>
+            </span>
           </div>
         </div>
       </article>
