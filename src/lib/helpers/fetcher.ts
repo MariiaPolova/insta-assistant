@@ -30,7 +30,14 @@ async function fetcher(url: string) {
       throw new Error(error.message || "Request failed");
     }
     
-    return res.json();
+     // Check if the content type is JSON
+    const contentType = res.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      return await res.json();
+    } else {
+      // Handle other content types like plain text if necessary
+      return await res.text();
+    }
   } catch (error: any) {
     throw new Error(error.message);
   }

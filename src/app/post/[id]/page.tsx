@@ -7,7 +7,6 @@ import usePost from "../../../lib/hooks/usePost";
 import LoadingSpinner from "../../../components/common/Spinner";
 import ErrorMessage from "../../../components/common/ErrorMessage";
 import { getAverageRGB } from "../../../lib/helpers/pickImageColor";
-import { ArrowUturnLeftIcon } from "@heroicons/react/20/solid";
 import { ThemeContext } from "../../../context/themeContext";
 import ActionButton from "../../../components/common/ActionButton";
 import { ChevronLeftIcon, LinkIcon } from "@heroicons/react/24/outline";
@@ -79,13 +78,6 @@ export default function PostInfoPage() {
                 {hashtag}
               </span>
             )}
-          </div>
-          <div className="mt-6">
-            <span className="inline-flex items-center px-3 py-1.5 text-xs font-semibold rounded-full border-2 border-white/20 text-white shadow-md">
-              <time className="font-mono">
-                {`Created at: ${new Date(post.created_at).toLocaleDateString()} ${new Date(post.created_at).toLocaleTimeString()}`}
-              </time>
-            </span>
           </div>
         </div>
       </article>

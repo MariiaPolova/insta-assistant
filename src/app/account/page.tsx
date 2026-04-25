@@ -19,9 +19,8 @@ export default function Index() {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({ username: '', postsCount: 10 });
 
-  const handleFormChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleFormChange = (fieldName, fieldValue) => {
+    setFormData((prev) => ({ ...prev, [fieldName]: fieldValue }));
   };
 
   const createAccount = async (username, postsCount) => {
@@ -42,6 +41,24 @@ export default function Index() {
     setFormData({ username: '', postsCount: 10 });
   }
 
+
+  const accountFields = [
+    {
+      name: 'username',
+      label: 'Username',
+      type: 'text',
+      required: true,
+      placeholder: 'Enter username'
+    },
+    {
+      name: 'postsCount',
+      label: 'Posts Count',
+      type: 'number',
+      required: true,
+      placeholder: 'Enter number of posts to fetch'
+    }
+  ];
+
   if (!accounts && isLoading) {
     return <LoadingSpinner />;
   }
@@ -56,12 +73,19 @@ export default function Index() {
       <ModalDialog
         open={open}
         setOpen={setOpen}
-        inputLabel='username'
-        inputValue={formData.username}
-        handleInputChange={handleFormChange}
-        postsCount={formData.postsCount}
-        handlePostsCountChange={handleFormChange}
-        onOk={createAccount}
+        title="Add new account"
+        formData={formData}
+        fields={accountFields}
+        onSubmit={createAccount}
+        onFormChange={handleFormChange}
+        submitLabel="Create Account"
+
+        // inputLabel='username'
+        // inputValue={formData.username}
+        // handleInputChange={handleFormChange}
+        // postsCount={formData.postsCount}
+        // handlePostsCountChange={handleFormChange}
+        // onOk={createAccount}
       ></ModalDialog>
       <div className="px-4 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600 pb-20 py-4 lg:pt-12 lg:pb-24 flex flex-row justify-between items-center">
         <div className="inline-flex">

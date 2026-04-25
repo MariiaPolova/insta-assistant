@@ -1,23 +1,35 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, Input } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
-export default function ModalDialog({ open, setOpen, inputLabel, inputValue, handleInputChange, onOk, postsCount, handlePostsCountChange }) {
+export default function ModalDialog({ 
+  open, 
+  setOpen, 
+  title, 
+  formData, 
+  fields, 
+  onSubmit, 
+  submitLabel = "Add", 
+  onFormChange 
+}) {
   const [error, setError] = useState<string | null>(null);
 
-  const handleAdd = () => {
-    if (!inputValue || inputValue.trim() === "") {
-      setError("Username is required.");
-      return;
+  const handleSubmit = () => {
+    // Basic validation for required fields
+    const requiredFields = fields.filter(field => field.required);
+    for (const field of requiredFields) {
+      if (!formData[field.name] || formData[field.name].toString().trim() === "") {
+        setError(`${field.label} is required.`);
+        return;
+      }
     }
     setError(null);
-    onOk(inputValue, postsCount);
+    onSubmit(formData);
   };
 
   return (
-    <Dialog open={open} onClose={setOpen} className="relative z-10">
+    <Dialog open={open} onClose={() => setOpen(false)} className="relative z-10">
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
@@ -33,39 +45,31 @@ export default function ModalDialog({ open, setOpen, inputLabel, inputValue, han
               <div className="sm:flex sm:items-start">
                 <div className="w-full">
                   <DialogTitle as="h3" className="text-xl font-bold text-center text-blue-700 dark:text-purple-400 mb-8">
-                    Add new account
+                    {title}
                   </DialogTitle>
                   <div className="mt-4 flex flex-col gap-6 justify-center">
-                    <div className="flex flex-col items-start w-full">
-                      <label htmlFor={inputLabel} className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username <span className="text-red-500">*</span></label>
-                      <Input
-                        id={inputLabel}
-                        name={inputLabel}
-                        type="text"
-                        placeholder={inputLabel}
-                        required
-                        className="block w-full rounded-lg border border-blue-300 dark:border-purple-700 bg-white dark:bg-gray-900 py-2 px-4 text-base text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-purple-500 sm:text-sm"
-                        value={inputValue}
-                        onChange={e => {
-                          handleInputChange(e);
-                          if (error) setError(null);
-                        }}
-                      />
-                      {error && <span className="mt-2 text-sm text-red-600">{error}</span>}
-                    </div>
-                    <div className="flex flex-col items-start w-full">
-                      <label htmlFor="postsCount" className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Number of posts to fetch</label>
-                      <Input
-                        id="postsCount"
-                        name="postsCount"
-                        type="number"
-                        min={1}
-                        placeholder="Enter number"
-                        className="block w-full rounded-lg border border-blue-300 dark:border-purple-700 bg-white dark:bg-gray-900 py-2 px-4 text-base text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-purple-500 sm:text-sm"
-                        value={postsCount}
-                        onChange={handlePostsCountChange}
-                      />
-                    </div>
+                    {fields.map((field) => (
+                      <div key={field.name} className="flex flex-col items-start w-full">
+                        <label htmlFor={field.name} className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                          {field.label} {field.required && <span className="text-red-500">*</span>}
+                        </label>
+                        <Input
+                          id={field.name}
+                          name={field.name}
+                          type={field.type || "text"}
+                          placeholder={field.placeholder || field.label}
+                          required={field.required}
+                          min={field.min}
+                          className="block w-full rounded-lg border border-blue-300 dark:border-transparent bg-white dark:bg-gray-900 py-2 px-4 text-base text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-purple-500 sm:text-sm"
+                          value={formData[field.name] || ''}
+                          onChange={(e) => {
+                            onFormChange(field.name, field.type === 'number' ? parseInt(e.target.value) : e.target.value);
+                            if (error) setError(null);
+                          }}
+                        />
+                      </div>
+                    ))}
+                    {error && <span className="mt-2 text-sm text-red-600">{error}</span>}
                   </div>
                 </div>
               </div>
@@ -73,10 +77,10 @@ export default function ModalDialog({ open, setOpen, inputLabel, inputValue, han
             <div className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 rounded-b-lg">
               <button
                 type="button"
-                onClick={handleAdd}
+                onClick={handleSubmit}
                 className="inline-flex w-full justify-center rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-md hover:from-blue-700 hover:to-purple-700 transition-all duration-300 sm:ml-3 sm:w-auto"
               >
-                Add
+                {submitLabel}
               </button>
               <button
                 type="button"
