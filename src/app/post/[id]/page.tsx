@@ -52,7 +52,7 @@ export default function PostInfoPage() {
           <div className="flex items-center"><UserMenu transparent /></div>
         </div>
       </div>
-      <article className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex lg:flex-row flex-col rounded-lg min-h-[95vh] -mt-20 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
+      <article className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex lg:flex-row flex-col rounded-lg min-h-[85vh] -mt-20 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
         <Image
           onLoad={(e) => setImage(e.target)}
           className="w-35 object-cover max-sm:h-80 sm:aspect-[2/1] lg:aspect-square rounded-lg"

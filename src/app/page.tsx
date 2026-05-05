@@ -47,7 +47,7 @@ export default function Home() {
         <div className="flex items-center"><UserMenu transparent /></div>
       </div>
       
-      <div className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex gap-y-4 flex-col rounded-lg min-h-[95vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
+      <div className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex gap-y-4 flex-col rounded-lg min-h-[85vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
         <div className="grid md:grid-cols-2 gap-6">
           <Link
             href="/account"

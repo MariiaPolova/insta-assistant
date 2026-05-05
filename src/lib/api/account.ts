@@ -21,8 +21,16 @@ const AccountAPI = {
     } catch (error) {
       return error.response;
     }
+  },
+  delete: async (username) => {
+    try {
+      const response = await requester('DELETE',
+        `${SERVER_BASE_URL}/api/accounts/${username}`);
+      return response;
+    } catch (error) {
+      return error.response;
+    }
   }
-  ,
 };
 
 export default AccountAPI;

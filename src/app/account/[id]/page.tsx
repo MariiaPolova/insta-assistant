@@ -69,7 +69,7 @@ export default function AccountInfoPage() {
     <Fragment>
       <PageHeader data={account} />
       {postIsLoading && (
-        <div className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex items-center justify-center rounded-lg min-h-[95vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
+        <div className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex items-center justify-center rounded-lg min-h-[85vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
           <div className="text-center">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent mx-auto mb-4"></div>
             <p className="text-lg font-medium text-gray-600 dark:text-gray-400">Loading posts...</p>
@@ -78,7 +78,7 @@ export default function AccountInfoPage() {
       )}
 
       {/* Main Content */}
-      <div className="m-3 lg:mx-8 lg:py-10 px-6 lg:px-12 flex gap-y-6 flex-col rounded-lg min-h-[95vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
+      <div className="m-3 lg:mx-8 lg:py-10 px-6 lg:px-12 flex gap-y-6 flex-col rounded-lg min-h-[85vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
         {/* Account link, fetch button, and fetch date */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4">
           <span className="inline-flex items-center px-4 py-2.5 text-sm font-semibold rounded-lg bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 text-blue-700 dark:text-blue-300 shadow-md sm:order-3 cursor-pointer hover:from-blue-200 hover:to-indigo-200 dark:hover:from-blue-900/40 dark:hover:to-indigo-900/40 transition-all duration-300">

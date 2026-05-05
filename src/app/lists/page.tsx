@@ -134,7 +134,7 @@ export default function ListsPage() {
           <div className="flex items-center"><UserMenu transparent /></div>
         </div>
         
-        <div className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex gap-y-4 flex-col rounded-lg min-h-[95vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
+        <div className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex gap-y-4 flex-col rounded-lg min-h-[85vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
           <div className="flex flex-col items-center justify-center text-center py-20">
             <div className="bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 rounded-full p-8 w-32 h-32 mx-auto mb-8 flex items-center justify-center">
               <svg className="w-16 h-16 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -221,7 +221,7 @@ export default function ListsPage() {
         </div>
         <div className="flex items-center"><UserMenu transparent /></div>
       </div>
-      <div className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex gap-y-4 flex-col rounded-lg min-h-[95vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
+      <div className="m-3 lg:mx-8 py-10 px-6 lg:px-12 flex gap-y-4 flex-col rounded-lg min-h-[85vh] -mt-16 bg-[var(--background)]/20 backdrop-blur-md shadow-xl">
         <ul role="list" className="space-y-4">
           {lists.map((list, index) => (
             <li key={`${list.id}_${index}`} className="group bg-white dark:bg-gray-800 rounded-xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-blue-500 dark:hover:border-blue-400">
@@ -238,23 +238,45 @@ export default function ListsPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => handleDeleteClick(list)}
-                    className="flex items-center gap-2 rounded-full px-4 py-2.5 font-semibold bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50 transition-all duration-300 shadow-md hover:shadow-lg group-hover:scale-105"
-                  >
-                    <TrashIcon className="size-4" />
-                    <span className="text-sm">Delete</span>
-                  </button>
-                  <Link
-                    href="/lists/[id]"
-                    as={`/lists/${list.id}`}
-                    className="flex items-center gap-2 rounded-full px-5 py-2.5 font-semibold bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-md hover:shadow-lg group-hover:scale-105"
-                  >
-                    <span className="text-sm">View Posts</span>
-                    <svg className="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                    </svg>
-                  </Link>
+                  {/* Mobile: Icon-only buttons */}
+                  <div className="flex gap-2 sm:hidden">
+                    <button
+                      onClick={() => handleDeleteClick(list)}
+                      className="flex items-center justify-center rounded-full p-2.5 font-semibold bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50 transition-all duration-300 shadow-md hover:shadow-lg"
+                    >
+                      <TrashIcon className="size-4" />
+                    </button>
+                    <Link
+                      href="/lists/[id]"
+                      as={`/lists/${list.id}`}
+                      className="flex items-center justify-center rounded-full p-2.5 font-semibold bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-md hover:shadow-lg"
+                    >
+                      <svg className="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                      </svg>
+                    </Link>
+                  </div>
+                  
+                  {/* Desktop: Full buttons with text */}
+                  <div className="hidden sm:flex items-center gap-3">
+                    <button
+                      onClick={() => handleDeleteClick(list)}
+                      className="flex items-center gap-2 rounded-full px-4 py-2.5 font-semibold bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50 transition-all duration-300 shadow-md hover:shadow-lg group-hover:scale-105"
+                    >
+                      <TrashIcon className="size-4" />
+                      <span className="text-sm">Delete</span>
+                    </button>
+                    <Link
+                      href="/lists/[id]"
+                      as={`/lists/${list.id}`}
+                      className="flex items-center gap-2 rounded-full px-5 py-2.5 font-semibold bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-md hover:shadow-lg group-hover:scale-105"
+                    >
+                      <span className="text-sm">View Posts</span>
+                      <svg className="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                      </svg>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </li>
